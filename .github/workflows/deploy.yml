@@ -1,0 +1,11 @@
+name: Deploy Time Slot Finder
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    deploy:
+        name: Deploy to AWS
+        runs-on: ubuntu-latest
