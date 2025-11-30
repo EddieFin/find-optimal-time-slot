@@ -39,7 +39,7 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
 }
 
 resource "aws_api_gateway_rest_api" "api" {
-  name        = "optimal-time-rest-api"
+  name        = "find-optimal-time-slot-rest-api"
   description = "API for finding optimal meeting slots"
 }
 

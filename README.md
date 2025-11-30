@@ -20,7 +20,7 @@ Create Identity Provider:
 
 Create role for GitHub Actions to assume:
 
-```json
+```bash
 aws iam create-role --role-name GitHubActionsWorkflowRole --assume-role-policy-document '{
   "Version": "2012-10-17",
   "Statement": [
@@ -33,7 +33,7 @@ aws iam create-role --role-name GitHubActionsWorkflowRole --assume-role-policy-d
       "Condition": {
         "StringEquals": {
           "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-          "token.actions.githubusercontent.com:sub": "repo:EddieFin/find-optimal-time-slot:ref:refs/heads/main"
+          "token.actions.githubusercontent.com:sub": "repo:eddiefin/find-optimal-time-slot:ref:refs/heads/main"
         }
       }
     }
@@ -43,7 +43,7 @@ aws iam create-role --role-name GitHubActionsWorkflowRole --assume-role-policy-d
 
 Create a suitable permission policy:
 
-```json
+```bash
 aws iam create-policy --policy-name GitHubActionsWorkflowPolicy --policy-document '{
   "Version": "2012-10-17",
   "Statement": [
@@ -91,7 +91,7 @@ aws iam create-policy --policy-name GitHubActionsWorkflowPolicy --policy-documen
         "iam:ListRolePolicies",
         "iam:ListAttachedRolePolicies"
       ],
-      "Resource": "arn:aws:iam::581429708653:role/FindOptimalTimeSlotLambdaExecRole"
+      "Resource": "arn:aws:iam::581429708653:role/find-optimal-time-lambda-role"
     }
   ]
 }'
