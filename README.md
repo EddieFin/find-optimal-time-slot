@@ -33,7 +33,7 @@ aws iam create-role --role-name GitHubActionsWorkflowRole --assume-role-policy-d
       "Condition": {
         "StringEquals": {
           "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-          "token.actions.githubusercontent.com:sub": "repo:eddiefin/find-optimal-time-slot:ref:refs/heads/main"
+          "token.actions.githubusercontent.com:sub": "repo:EddieFin/find-optimal-time-slot:ref:refs/heads/main"
         }
       }
     }
