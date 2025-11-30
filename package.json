@@ -2,7 +2,7 @@
   "name": "find-optimal-time-slot",
   "version": "1.0.0",
   "scripts": {
-    "build": "esbuild index.ts --bundle --minify --platform=node --target=node24 --outfile=dist/index.js"
+    "build": "esbuild src/index.ts --bundle --minify --platform=node --target=node24 --outfile=dist/index.js"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.159",
