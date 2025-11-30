@@ -51,3 +51,5 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         working-directory: ./infra
         run: terraform apply -auto-approve -input=false
+        env:
+          TF_VAR_allowed_source_ip_cidr: ${{ secrets.ALLOWED_IP_CIDR || '0.0.0.0/0' }}
