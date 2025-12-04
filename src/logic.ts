@@ -1,5 +1,10 @@
 import { OptimizeRequest, OptimizeResponse, OptimalSlot } from "./types";
 
+const isValidDate = (dateString: string) => {
+  const regex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/;
+  return regex.test(dateString);
+};
+
 export function findOptimalSlots(request: OptimizeRequest): OptimizeResponse {
   if (!request.participants || request.participants.length === 0) {
     throw new Error("Invalid input: Participants list cannot be empty.");
@@ -15,6 +20,9 @@ export function findOptimalSlots(request: OptimizeRequest): OptimizeResponse {
     const uniqueSlots = new Set(p.preferredSlots);
 
     uniqueSlots.forEach((slot) => {
+      if (!isValidDate(slot)) {
+        throw new Error(`Invalid input: Slot "${slot}" is not in ISO 8601 format (YYYY-MM-DDTHH:mm).`);
+      }
       if (!slotCounts.has(slot)) {
         slotCounts.set(slot, []);
       }
