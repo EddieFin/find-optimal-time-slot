@@ -30,8 +30,6 @@ export function findOptimalSlots(request: OptimizeRequest): OptimizeResponse {
     if (attendees.length > maxCount) maxCount = attendees.length;
   });
 
-  if (maxCount === 0) throw new Error("No matches found.");
-
   // Collect winning slots
   const optimalSlots: OptimalSlot[] = [];
   slotCounts.forEach((attendees, slot) => {
