@@ -26,6 +26,7 @@ jobs:
       - name: Install & Build
         run: |
           npm ci
+          npm test
           npm run build
 
       - name: Configure AWS Credentials
