@@ -10,6 +10,15 @@ const mockContext = {} as Context;
 const mockCallback = jest.fn();
 
 describe("Lambda Handler: index.ts", () => {
+  beforeAll(() => {
+    jest.spyOn(console, "log").mockImplementation(() => {});
+    jest.spyOn(console, "error").mockImplementation(() => {});
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
+
   it("returns 200 and optimal slots for valid input", async () => {
     const body = {
       meetingName: "Test",
