@@ -7,7 +7,6 @@ export function findOptimalSlots(request: OptimizeRequest): OptimizeResponse {
 
   const slotCounts = new Map<string, string[]>();
 
-  // Count unique votes per participant
   request.participants.forEach((p) => {
     if (!p.preferredSlots) {
       throw new Error(`Invalid input: Participant "${p.name}" has no preferredSlots.`);
@@ -27,13 +26,11 @@ export function findOptimalSlots(request: OptimizeRequest): OptimizeResponse {
     throw new Error("No time slots provided by any participant.");
   }
 
-  // Find max participation
   let maxCount = 0;
   slotCounts.forEach((attendees) => {
     if (attendees.length > maxCount) maxCount = attendees.length;
   });
 
-  // Collect winning slots
   const optimalSlots: OptimalSlot[] = [];
   slotCounts.forEach((attendees, slot) => {
     if (attendees.length === maxCount) {
@@ -44,7 +41,6 @@ export function findOptimalSlots(request: OptimizeRequest): OptimizeResponse {
     }
   });
 
-  // Sort by date/time
   optimalSlots.sort((a, b) => a.slot.localeCompare(b.slot));
 
   return {
