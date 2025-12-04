@@ -48,7 +48,7 @@ graph TD
 
 ## CI/CD & Deployment
 
-This project uses **GitHub Actions** for continuous integration and deployment. The pipeline is triggered automatically on pushes to the `main` branch.
+This project uses **GitHub Actions** for continuous integration and deployment. The pipeline is triggered automatically on pushes to the `main` branch, with additional manual dispatching required for *terraform apply* to be run.
 
 ### Prerequisites
 
@@ -60,7 +60,7 @@ This project uses **GitHub Actions** for continuous integration and deployment. 
 
 1. **Commit & Push:** Push changes to the `main` branch.
 2. **Validation:** The pipeline runs `npm test` and `npm run build`.
-3. **Infrastructure:** Terraform plans and applies changes to the AWS infrastructure.
+3. **Infrastructure:** Terraform plans changes to the AWS infrastructure. For Terraform to apply the changes, dispatch the workflow manually after confirming desired changes in plan output.
 4. **Output:** Upon success, the pipeline logs (Terraform Output) will display the public **API Endpoint URL**.
 
 ---
