@@ -7,16 +7,19 @@ export function findOptimalSlots(request: OptimizeRequest): OptimizeResponse {
 
   const slotCounts = new Map<string, string[]>();
 
-  // Count votes (ensure 1 vote per person per slot)
+  // Count unique votes per participant
   request.participants.forEach((p) => {
-    if (!p.preferredSlots) return;
+    if (!p.preferredSlots) {
+      throw new Error(`Invalid input: Participant "${p.name}" has no preferredSlots.`);
+    }
+
     const uniqueSlots = new Set(p.preferredSlots);
 
     uniqueSlots.forEach((slot) => {
       if (!slotCounts.has(slot)) {
         slotCounts.set(slot, []);
       }
-      slotCounts.get(slot)?.push(p.name);
+      slotCounts.get(slot)!.push(p.name);
     });
   });
 
