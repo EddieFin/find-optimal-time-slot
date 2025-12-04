@@ -21,7 +21,7 @@ export function findOptimalSlots(request: OptimizeRequest): OptimizeResponse {
 
     uniqueSlots.forEach((slot) => {
       if (!isValidDate(slot)) {
-        throw new Error(`Invalid input: Slot "${slot}" is not in ISO 8601 format (YYYY-MM-DDTHH:mm).`);
+        throw new Error(`Invalid input: Slot '${slot}' is not in ISO 8601 format (YYYY-MM-DDTHH:mm).`);
       }
       if (!slotCounts.has(slot)) {
         slotCounts.set(slot, []);
