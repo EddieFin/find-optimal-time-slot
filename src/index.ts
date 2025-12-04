@@ -22,15 +22,17 @@ export const handler: APIGatewayProxyHandler = async (event) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(result),
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error processing request:", error);
 
-    const isClientError = error.message.includes("Invalid input") || error.message.includes("No matches") || error.message.includes("No time slots");
+    const message = error instanceof Error ? error.message : String(error);
+
+    const isClientError = message.includes("Invalid input") || message.includes("No matches") || message.includes("No time slots");
 
     return {
       statusCode: isClientError ? 400 : 500,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ error: error.message }),
+      body: JSON.stringify({ error: message }),
     };
   }
 };
