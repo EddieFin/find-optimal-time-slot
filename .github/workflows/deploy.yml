@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   id-token: write
@@ -47,9 +48,11 @@ jobs:
         id: plan
         working-directory: ./infra
         run: terraform plan -no-color -input=false
+        env:
+          TF_VAR_allowed_source_ip_cidr: ${{ secrets.ALLOWED_IP_CIDR || '0.0.0.0/0' }}
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
         working-directory: ./infra
         run: terraform apply -auto-approve -input=false
         env:
